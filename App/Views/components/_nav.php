@@ -5,13 +5,13 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-        <?php
-        if($connected){  
-            echo '<li class="nav-item active">
-              <a class="nav-link" href="index.php?page=photo&action=create">Poster une image<span class="sr-only">(current)</span></a>
+      <?php
+      if ($connected) {
+        echo '<li class="nav-item active">
+              <a class="nav-link" href="index.php?entity=photo&action=create">Poster une image<span class="sr-only">(current)</span></a>
             </li>';
-        }
-        ?>
+      }
+      ?>
     </ul>
   </div>
 </nav>
