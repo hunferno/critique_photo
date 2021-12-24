@@ -7,18 +7,20 @@ class Photo
 {
 
     //LES PROPRIETES
-    private int $id_photo;
+    private ?int $id_photo;
     private string $title_photo;
     private string $name_file;
     private string $post_at;
     private string $id_user;
 
     //LE CONSTRUCTUER
-    public function __construct(string $login, string $psw, string $pseudo)
+    public function __construct(string $title = '', string $name = '', int $id_user = 0)
     {
-        $this->login = $login;
-        $this->psw = $psw;
-        $this->pseudo = $pseudo;
+        $this->id_photo = null;
+        $this->title_photo = $title;
+        $this->name_file = $name;
+        $this->post_at = ""; //LA DB VA L'IMPLEMENTER
+        $this->id_user = $id_user;
     }
 
     //LES GETTERS

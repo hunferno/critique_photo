@@ -13,10 +13,11 @@ class User
     private string $pseudo;
 
     //LE CONSTRUCTUER
-    public function __construct(string $login, string $psw, string $pseudo)
+    public function __construct(string $login = '', string $psw = '', string $pseudo = '')
     {
+        $this->id_user = 0;
         $this->login = $login;
-        $this->psw = $psw;
+        $this->psw = password_hash($psw, null);
         $this->pseudo = $pseudo;
     }
 

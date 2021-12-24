@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-use App\Controllers\AppController;
+// use App\Controllers\AppController;
 use App\Controllers\UserController;
 use App\Controllers\PhotoController;
 
@@ -10,10 +10,10 @@ spl_autoload_register(function ($link) {
     require_once $link . '.php';
 });
 
-$_SESSION['connected'] = false;
+if (!isset($_SESSION['connected'])) $_SESSION['connected'] = false;
 
 $entity = filter_input(INPUT_GET, 'entity', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?? 'home';
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?? 'list';
 
 switch ($entity) {
     case 'user':
@@ -25,7 +25,8 @@ switch ($entity) {
         break;
 
     default:
-        $ctrl = new AppController();
+        // $ctrl = new AppController();
+        $ctrl = new PhotoController();
         break;
 }
 

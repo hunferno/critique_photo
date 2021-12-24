@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\UserModel;
+use Exception;
+
 class UserController extends Controller
 {
 
@@ -15,10 +18,25 @@ class UserController extends Controller
 
     public function check()
     {
+        try {
+
+            $model = new UserModel();
+            $model->verifyUser();
+            $_SESSION['connected'] = true;
+            $this->render('home');
+        } catch (Exception $err) {
+
+            $param = ['error' => $err->getMessage(), 'email' => ''];
+            $this->render('user/form_connect', $param);
+        }
     }
 
     public function disconnect()
     {
+        $_SESSION = [];
+        session_destroy();
+        $_SESSION['connected'] = false;
+        $this->render('home');
     }
 
     public function create()
@@ -29,5 +47,8 @@ class UserController extends Controller
 
     public function new()
     {
+        $model = new UserModel();
+        $model->newUser();
+        $this->render('home');
     }
 }
