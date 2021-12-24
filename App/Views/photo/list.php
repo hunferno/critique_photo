@@ -9,7 +9,7 @@
         echo '<div class="card-body">';
         echo '<h5 class="card-title">' . $photo->getTitle_photo() . '</h5>';
         echo '<p class="card-text">';
-        echo '<h3>postée par : ' . 'Pseudo du posteur' . '</h3>';
+        echo '<h3>postée par : ' . $photo->getPseudo() . '</h3>';
         echo '<h3>date : ' . $photo->getPost_at() . '</h3>';
         echo '</p>';
         echo '</div>';

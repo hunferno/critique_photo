@@ -23,7 +23,8 @@ class UserController extends Controller
             $model = new UserModel();
             $model->verifyUser();
             $_SESSION['connected'] = true;
-            $this->render('home');
+            header('Location:index.php');
+            exit();
         } catch (Exception $err) {
 
             $param = ['error' => $err->getMessage(), 'email' => ''];
@@ -36,7 +37,8 @@ class UserController extends Controller
         $_SESSION = [];
         session_destroy();
         $_SESSION['connected'] = false;
-        $this->render('home');
+        header('Location:index.php');
+        exit();
     }
 
     public function create()

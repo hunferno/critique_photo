@@ -12,6 +12,7 @@ class Photo
     private string $name_file;
     private string $post_at;
     private string $id_user;
+    private string $pseudo;
 
     //LE CONSTRUCTUER
     public function __construct(string $title = '', string $name = '', int $id_user = 0)
@@ -19,8 +20,9 @@ class Photo
         $this->id_photo = null;
         $this->title_photo = $title;
         $this->name_file = $name;
-        $this->post_at = ""; //LA DB VA L'IMPLEMENTER
+        $this->post_at = ""; //LA DAO VA L'IMPLEMENTER
         $this->id_user = $id_user;
+        $this->pseudo = '';
     }
 
     //LES GETTERS
@@ -47,5 +49,10 @@ class Photo
     public function getId_user()
     {
         return $this->id_user;
+    }
+
+    public function getPseudo()
+    {
+        return $this->pseudo;
     }
 }

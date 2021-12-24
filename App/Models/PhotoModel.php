@@ -28,4 +28,11 @@ class PhotoModel
         $listPhoto = $dao->selectAllPhoto();
         return $listPhoto;
     }
+
+    public function getPhotoById($id)
+    {
+        $dao = new Dao();
+        $getPhoto = $dao->selectPhoto($id);
+        return $getPhoto;
+    }
 }

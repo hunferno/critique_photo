@@ -2,10 +2,11 @@
 
 namespace App\DataBase;
 
-use App\Entities\Photo;
-use App\Entities\User;
-use Exception;
 use PDO;
+use Exception;
+use App\Entities\User;
+use App\Entities\Photo;
+use App\Entities\Comment;
 
 class Dao
 {
@@ -65,12 +66,51 @@ class Dao
 
     public function selectAllPhoto()
     {
-        $sql = 'SELECT * FROM photo';
+        $sql = 'SELECT * FROM photo NATURAL JOIN user';
         $photoStat = $this->dbConnect->prepare($sql);
         $photoStat->setFetchMode(PDO::FETCH_PROPS_LATE | PDO::FETCH_CLASS, 'App\Entities\Photo');
         $photoStat->execute();
 
         $photos = $photoStat->fetchAll();
         return $photos;
+    }
+
+    public function selectPhoto($id)
+    {
+        $sql = "SELECT * FROM photo NATURAL JOIN user WHERE id_photo = :id";
+        $photoStat = $this->dbConnect->prepare($sql);
+        $photoStat->bindParam(':id', $id);
+        $photoStat->setFetchMode(PDO::FETCH_PROPS_LATE | PDO::FETCH_CLASS, 'App\Entities\Photo');
+        $photoStat->execute();
+
+        $photo = $photoStat->fetch();
+        return $photo;
+    }
+
+    public function insertComment(Comment $comment)
+    {
+
+        $sql = 'INSERT INTO comment VALUE (null, :comment, CURDATE(), :id_user, :id_photo)';
+        $commentStat = $this->dbConnect->prepare($sql);
+
+        $param = [
+            ':comment' => $comment->getComment(),
+            ':id_photo' => $comment->getId_photo(),
+            ':id_user' => $comment->getId_user()
+        ];
+
+        $commentStat->execute($param);
+    }
+
+    public function selectAllCommentById($id)
+    {
+        $sql = 'SELECT * FROM comment NATURAL JOIN user NATURAL JOIN photo WHERE id_photo = :id';
+        $commentsStat = $this->dbConnect->prepare($sql);
+        $commentsStat->bindParam(':id', $id);
+        $commentsStat->setFetchMode(PDO::FETCH_PROPS_LATE | PDO::FETCH_CLASS, 'App\Entities\Comment');
+        $commentsStat->execute();
+
+        $comments = $commentsStat->fetchAll();
+        return $comments;
     }
 }

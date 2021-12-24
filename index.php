@@ -4,6 +4,7 @@ session_start();
 // use App\Controllers\AppController;
 use App\Controllers\UserController;
 use App\Controllers\PhotoController;
+use App\Controllers\CommentController;
 
 //FAIRE L'AUTOLOAD REGISTER
 spl_autoload_register(function ($link) {
@@ -22,6 +23,10 @@ switch ($entity) {
 
     case 'photo':
         $ctrl = new PhotoController();
+        break;
+
+    case 'comment':
+        $ctrl = new CommentController();
         break;
 
     default:
