@@ -10,7 +10,7 @@ class CommentController extends Controller
     {
         $model = new CommentModel();
         $model->newComment();
-        header('Location:index.php');
+
         exit();
     }
 }

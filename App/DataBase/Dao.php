@@ -104,7 +104,8 @@ class Dao
 
     public function selectAllCommentById($id)
     {
-        $sql = 'SELECT * FROM comment NATURAL JOIN user NATURAL JOIN photo WHERE id_photo = :id';
+        // $sql = 'SELECT * FROM comment NATURAL JOIN user NATURAL JOIN photo WHERE id_photo = :id';
+        $sql = 'SELECT * FROM comment NATURAL JOIN user WHERE id_photo = :id';
         $commentsStat = $this->dbConnect->prepare($sql);
         $commentsStat->bindParam(':id', $id);
         $commentsStat->setFetchMode(PDO::FETCH_PROPS_LATE | PDO::FETCH_CLASS, 'App\Entities\Comment');

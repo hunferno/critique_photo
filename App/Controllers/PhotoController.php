@@ -35,7 +35,8 @@ class PhotoController extends Controller
     public function show()
     {
         $idPhoto = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-
+        // var_dump($idPhoto);
+        // die();
         $modelPhoto = new PhotoModel();
         $modelComment = new CommentModel();
         $photo = $modelPhoto->getPhotoById($idPhoto);
@@ -43,9 +44,5 @@ class PhotoController extends Controller
         $param = ['photo' => $photo, 'comments' => $comments];
 
         $this->render('photo/show', $param);
-    }
-
-    public function comment()
-    {
     }
 }
