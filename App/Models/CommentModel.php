@@ -22,8 +22,6 @@ class CommentModel
     {
         $dao = new Dao();
         $comments = $dao->selectAllCommentById($id);
-        // var_dump($comments);
-        // die();
         return $comments;
     }
 }

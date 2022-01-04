@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\PhotoModel;
 use App\Models\CommentModel;
 
 class CommentController extends Controller
@@ -11,6 +12,10 @@ class CommentController extends Controller
         $model = new CommentModel();
         $model->newComment();
 
-        exit();
+        $model = new PhotoModel();
+        $photos = $model->listPhoto();
+
+        $param = ['photos' => $photos];
+        $this->render('photo/list', $param);
     }
 }
